@@ -6,19 +6,21 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 /**
- * Book entity contains book info
+ * Stores order info
  **/
 @Entity
+@Table(name = "orderHistory")
 @Data
 @AllArgsConstructor(staticName = "Build")
 @NoArgsConstructor
-public class Book {
+public class Order {
 
     @Id
-    private int bookId;
+    private int orderId;
+    private String userName;
     private String bookName;
-    private String author;
-    private long bookPrize;
+    private int quantity;
 }

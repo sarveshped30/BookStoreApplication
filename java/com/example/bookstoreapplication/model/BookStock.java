@@ -8,17 +8,15 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 
 /**
- * Book entity contains book info
+ * BookStock entity contains info of stock of books
  **/
 @Entity
 @Data
 @AllArgsConstructor(staticName = "Build")
 @NoArgsConstructor
-public class Book {
+public class BookStock {
 
     @Id
-    private int bookId;
     private String bookName;
-    private String author;
-    private long bookPrize;
+    private int quantity;
 }

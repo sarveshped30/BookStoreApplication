@@ -4,21 +4,31 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
+/**
+ * Stores user info
+ **/
 @Entity
+@Table(name = "UserData")
 @Data
-@AllArgsConstructor
+@AllArgsConstructor(staticName = "Build")
 @NoArgsConstructor
 public class User {
 
     @Id
-    @GeneratedValue
     private int userId;
     private String name;
     private String mobileNo;
     private String emailId;
     private String password;
+    private String city;
+    private String country;
+    private long zipCode;
+    private String address;
+    @OneToMany
+    private List<Book> books = new ArrayList<>();
+
 }
