@@ -28,7 +28,7 @@ public class User {
     private String country;
     private long zipCode;
     private String address;
-    @OneToMany
+    @ManyToMany
     private List<Book> books = new ArrayList<>();
 
 }

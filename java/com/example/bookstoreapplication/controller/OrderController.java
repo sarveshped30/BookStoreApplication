@@ -2,6 +2,7 @@ package com.example.bookstoreapplication.controller;
 
 import com.example.bookstoreapplication.dto.ResponseDTO;
 import com.example.bookstoreapplication.exception.BookNotFoundException;
+import com.example.bookstoreapplication.exception.BookOutOfStockException;
 import com.example.bookstoreapplication.exception.UserNotFoundException;
 import com.example.bookstoreapplication.services.IOrderService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +26,7 @@ public class OrderController {
     //------------------------------Placing order---------------------------------//
     @PostMapping("")
     public ResponseEntity<ResponseDTO> placeOrder(@RequestParam("bookId") int bookId,
-                                                  @RequestParam("userId") int userId) throws UserNotFoundException, BookNotFoundException {
+                                                  @RequestParam("userId") int userId) throws UserNotFoundException, BookNotFoundException, BookOutOfStockException {
         ResponseDTO responseDTO = ResponseDTO.Build("Order successful", orderService.placeOrder(bookId, userId));
         return new ResponseEntity<>(responseDTO, HttpStatus.OK);
     }

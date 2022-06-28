@@ -37,7 +37,11 @@ public class CartService implements ICartService{
         Book book = bookService.getBookByBookId(bookId);
         User user = userService.getUserById(userId);
 
-        user.getBooks().remove(book);
+        if(user.getBooks().contains(book)) {
+            user.getBooks().remove(book);
+        } else {
+            throw new BookNotFoundException("User dont have this book in cart");
+        }
         return userRepository.save(user);
     }
 }

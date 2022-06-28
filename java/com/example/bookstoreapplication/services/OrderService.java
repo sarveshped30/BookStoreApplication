@@ -2,6 +2,7 @@ package com.example.bookstoreapplication.services;
 
 import com.example.bookstoreapplication.email.EmailSender;
 import com.example.bookstoreapplication.exception.BookNotFoundException;
+import com.example.bookstoreapplication.exception.BookOutOfStockException;
 import com.example.bookstoreapplication.exception.UserNotFoundException;
 import com.example.bookstoreapplication.model.Book;
 import com.example.bookstoreapplication.model.BookStock;
@@ -34,21 +35,27 @@ public class OrderService implements IOrderService {
     private EmailSender emailSender;
 
     @Override
-    public Order placeOrder(int bookId, int userId) throws UserNotFoundException, BookNotFoundException {
+    public Order placeOrder(int bookId, int userId) throws UserNotFoundException, BookNotFoundException, BookOutOfStockException {
         Book book = bookService.getBookByBookId(bookId);
         User user = userService.getUserById(userId);
+        removeFromStock(book,user);
         Order order = Order.Build(orderRepository.findAll().size() + 1, user.getName(),book.getBookName(), 1);
         sendOrderMail(order, user);
-        removeFromStock(book,user);
         return orderRepository.save(order);
     }
 
-    public void removeFromStock(Book book, User user) throws BookNotFoundException {
+    public void removeFromStock(Book book, User user) throws BookNotFoundException, BookOutOfStockException {
         BookStock bookStock = bookService.getBookStockByBookName(book.getBookName());
 
         if(user.getBooks().contains(book)) {
-            bookStock.setQuantity(bookStock.getQuantity() - 1);
-            bookStockRepository.save(bookStock);
+            if(bookStock.getQuantity() > 0) {
+                bookStock.setQuantity(bookStock.getQuantity() - 1);
+                bookStockRepository.save(bookStock);
+            } else {
+                throw new BookOutOfStockException("Book out of stock");
+            }
+        } else {
+            throw new BookNotFoundException("Book Not added to cart");
         }
     }
 
