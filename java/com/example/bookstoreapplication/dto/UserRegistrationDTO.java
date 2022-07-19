@@ -36,10 +36,10 @@ public class UserRegistrationDTO {
     private String city;
 
     @NotNull
-    private String country;
+    private String state;
 
     @NotNull
-    private long zipCode;
+    private int zipCode;
 
     @NotNull
     private String address;

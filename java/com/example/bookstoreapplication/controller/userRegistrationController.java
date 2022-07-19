@@ -14,6 +14,7 @@ import javax.validation.Valid;
 /**
  * UserRegistration controller for taking api calls for user registration and user data management
  **/
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping("/register")
 public class userRegistrationController {

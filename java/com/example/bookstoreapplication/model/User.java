@@ -25,8 +25,8 @@ public class User {
     private String emailId;
     private String password;
     private String city;
-    private String country;
-    private long zipCode;
+    private String state;
+    private int zipCode;
     private String address;
     @ManyToMany
     private List<Book> books = new ArrayList<>();

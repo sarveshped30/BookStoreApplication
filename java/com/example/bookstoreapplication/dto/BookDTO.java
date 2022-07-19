@@ -23,7 +23,7 @@ public class BookDTO {
     private String author;
 
     @NotNull(message = "book prize should not be null")
-    private long bookPrize;
+    private int bookPrize;
 
     @NotNull
     @Min(value = 1, message = "quantity should not be zero")

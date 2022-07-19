@@ -20,5 +20,5 @@ public class Book {
     private int bookId;
     private String bookName;
     private String author;
-    private long bookPrize;
+    private int bookPrize;
 }

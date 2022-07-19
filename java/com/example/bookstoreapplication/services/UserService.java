@@ -25,7 +25,7 @@ public class UserService implements IUserService {
     @Override
     public User addUser(UserRegistrationDTO userRegDTO) {
         User user = User.Build(userRepository.findAll().size() + 1, userRegDTO.getName(), userRegDTO.getMobileNo(),
-                    userRegDTO.getEmailId(), userRegDTO.getPassword(),userRegDTO.getCity(), userRegDTO.getCountry(),
+                    userRegDTO.getEmailId(), userRegDTO.getPassword(),userRegDTO.getCity(), userRegDTO.getState(),
                     userRegDTO.getZipCode(), userRegDTO.getAddress(), null);
         sendRegistrationMail(user);
         return userRepository.save(user);
@@ -61,7 +61,7 @@ public class UserService implements IUserService {
         user.setAddress(userRegistrationDTO.getAddress());
         user.setZipCode(userRegistrationDTO.getZipCode());
         user.setCity(userRegistrationDTO.getCity());
-        user.setCountry(userRegistrationDTO.getCountry());
+        user.setState(userRegistrationDTO.getState());
         return userRepository.save(user);
     }
 
@@ -74,4 +74,11 @@ public class UserService implements IUserService {
             throw new UserNotFoundException("User not found with id: " + userId);
         }
     }
+
+    @Override
+    public int getUserIdByUserName(String userName) {
+        int userId = userRepository.findByName(userName).getUserId();
+        return userId;
+    }
+
 }

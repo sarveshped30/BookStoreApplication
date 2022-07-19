@@ -15,6 +15,7 @@ import javax.validation.Valid;
  * Controls API requests regarding book services and provides proper http response
  * in form of response body and http status
  **/
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping("/seller")
 public class BookController {
@@ -38,8 +39,8 @@ public class BookController {
 
     //------------------------Getting quantity of book by book name----------------------//
     @GetMapping("/getQuantity/{bookName}")
-    public ResponseEntity<String> getBookQuantity(@PathVariable String bookName) throws BookNotFoundException {
-        return new ResponseEntity<>("Quantity of " + bookName + " in stock is: " + bookServices.getBookQuantity(bookName), HttpStatus.OK);
+    public ResponseEntity<Integer> getBookQuantity(@PathVariable String bookName) throws BookNotFoundException {
+        return new ResponseEntity<>(bookServices.getBookQuantity(bookName), HttpStatus.OK);
     }
 
     //-----------------------------Viewing book by book id-------------------------------//
