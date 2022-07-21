@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 
 /**
  * Book entity contains book info
@@ -21,4 +22,7 @@ public class Book {
     private String bookName;
     private String author;
     private int bookPrize;
+
+    @Lob
+    private String bookImage;
 }

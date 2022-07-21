@@ -32,7 +32,7 @@ public class BookManagementService implements IBookService{
     }
 
     public Book addBook(BookDTO bookDTO) {
-        Book book = Book.Build(bookRepository.findAll().size()+1,bookDTO.getBookName(), bookDTO.getAuthor(), bookDTO.getBookPrize());
+        Book book = Book.Build(bookRepository.findAll().size()+1,bookDTO.getBookName(), bookDTO.getAuthor(), bookDTO.getBookPrize(), bookDTO.getBookImage());
         return bookRepository.save(book);
     }
 
@@ -66,6 +66,7 @@ public class BookManagementService implements IBookService{
         book.setBookName(bookDTO.getBookName());
         book.setAuthor(bookDTO.getAuthor());
         book.setBookPrize(bookDTO.getBookPrize());
+        book.setBookImage(bookDTO.getBookImage());
         return bookRepository.save(book);
     }
 

@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.persistence.Lob;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
@@ -28,4 +29,6 @@ public class BookDTO {
     @NotNull
     @Min(value = 1, message = "quantity should not be zero")
     private int quantity;
+
+    private String bookImage;
 }
