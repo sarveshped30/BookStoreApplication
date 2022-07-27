@@ -56,4 +56,10 @@ public class userRegistrationController {
         userService.deleteUserById(userId);
         return new ResponseEntity<>("Deleted user by id: " + userId, HttpStatus.OK);
     }
+
+    //------------------------Get books count of user-----------------------//
+    @GetMapping("/BookCount/{userId}")
+    public ResponseEntity<Integer> getUserBookCount(@PathVariable int userId) throws UserNotFoundException {
+        return new ResponseEntity<>(userService.userBookCounts(userId), HttpStatus.OK);
+    }
 }

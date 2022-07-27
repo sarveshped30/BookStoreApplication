@@ -32,7 +32,7 @@ public class BookManagementService implements IBookService{
     }
 
     public Book addBook(BookDTO bookDTO) {
-        Book book = Book.Build(bookRepository.findAll().size()+1,bookDTO.getBookName(), bookDTO.getAuthor(), bookDTO.getBookPrize(), bookDTO.getBookImage());
+        Book book = Book.Build(bookRepository.findAll().size()+1,bookDTO.getBookName(), bookDTO.getAuthor(), bookDTO.getBookPrize(), 1,bookDTO.getBookImage());
         return bookRepository.save(book);
     }
 
@@ -91,6 +91,33 @@ public class BookManagementService implements IBookService{
         Book book = getBookByBookId(bookId);
         deleteBookStockByName(book.getBookName());
         bookRepository.delete(book);
+    }
+
+    @Override
+    public List<Book> sortBooksAscending() {
+        return bookRepository.sortBooksAscendingOrder();
+    }
+
+    @Override
+    public List<Book> sortBooksDescending() {
+        return bookRepository.sortBooksDescendingOrder();
+    }
+
+    @Override
+    public Book initiateBookQuantity(int bookId) throws BookNotFoundException {
+        Book book = this.getBookByBookId(bookId);
+        book.setQuantity(1);
+        return bookRepository.save(book);
+    }
+
+    @Override
+    public List<Book> initiateAllBooksQuantity() {
+        List<Book> books = this.getBooks();
+        for (Book book : books) {
+            book.setQuantity(1);
+            bookRepository.save(book);
+        }
+        return bookRepository.findAll();
     }
 
     private void deleteBookStockByName(String bookName) throws BookNotFoundException {

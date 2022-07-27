@@ -63,4 +63,28 @@ public class BookController {
         bookServices.deleteBookById(bookId);
         return new ResponseEntity<>("deleted book with id: " + bookId, HttpStatus.OK);
     }
+
+    @GetMapping("/sort/asc")
+    public ResponseEntity<ResponseDTO> sortAscending() {
+        ResponseDTO responseDTO = ResponseDTO.Build("Sorted in ascending order", bookServices.sortBooksAscending());
+        return new ResponseEntity<>(responseDTO, HttpStatus.OK);
+    }
+
+    @GetMapping("/sort/desc")
+    public ResponseEntity<ResponseDTO> sortDescending() {
+        ResponseDTO responseDTO = ResponseDTO.Build("Sorted in descending order", bookServices.sortBooksDescending());
+        return new ResponseEntity<>(responseDTO, HttpStatus.OK);
+    }
+
+    @GetMapping("/initiate/{bookId}")
+    public ResponseEntity<ResponseDTO> initiateBookQuantity(@PathVariable int bookId) throws BookNotFoundException {
+        ResponseDTO responseDTO = ResponseDTO.Build("Initiated..", bookServices.initiateBookQuantity(bookId));
+        return new ResponseEntity<>(responseDTO, HttpStatus.OK);
+    }
+
+    @GetMapping("/initiateAll")
+    public ResponseEntity<ResponseDTO> initiateAllBooksQuantity() {
+        ResponseDTO responseDTO = ResponseDTO.Build("Initiated all books..", bookServices.initiateAllBooksQuantity());
+        return new ResponseEntity<>(responseDTO, HttpStatus.OK);
+    }
 }

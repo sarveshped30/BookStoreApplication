@@ -9,4 +9,7 @@ public interface ICartService {
 
     User addToCart(int bookId, int userId) throws UserNotFoundException, BookNotFoundException;
     User removeFromCart(int bookId, int userId) throws BookNotFoundException, UserNotFoundException;
+    int addBookQuantity(int userId, int bookId) throws UserNotFoundException, BookNotFoundException;
+
+    int removeBookQuantity(int userId, int bookId) throws UserNotFoundException, BookNotFoundException;
 }

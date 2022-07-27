@@ -3,6 +3,7 @@ package com.example.bookstoreapplication.services;
 import com.example.bookstoreapplication.dto.UserRegistrationDTO;
 import com.example.bookstoreapplication.email.EmailSender;
 import com.example.bookstoreapplication.exception.UserNotFoundException;
+import com.example.bookstoreapplication.model.Book;
 import com.example.bookstoreapplication.model.User;
 import com.example.bookstoreapplication.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -79,6 +80,11 @@ public class UserService implements IUserService {
     public int getUserIdByUserName(String userName) {
         int userId = userRepository.findByName(userName).getUserId();
         return userId;
+    }
+
+    @Override
+    public int userBookCounts(int userId) throws UserNotFoundException {
+        return this.getUserById(userId).getBooks().size();
     }
 
 }

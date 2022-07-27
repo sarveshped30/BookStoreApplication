@@ -15,4 +15,7 @@ public interface IUserService {
     void deleteUserById(int userId) throws UserNotFoundException;
 
     int getUserIdByUserName(String userName);
+
+    int userBookCounts(int userId) throws UserNotFoundException;
+
 }

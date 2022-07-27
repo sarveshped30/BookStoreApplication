@@ -50,7 +50,7 @@ public class OrderService implements IOrderService {
 
         if(user.getBooks().contains(book)) {
             if(bookStock.getQuantity() > 0) {
-                bookStock.setQuantity(bookStock.getQuantity() - 1);
+                bookStock.setQuantity(bookStock.getQuantity() - book.getQuantity());
                 bookStockRepository.save(bookStock);
             } else {
                 throw new BookOutOfStockException("Book out of stock");

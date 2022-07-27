@@ -39,4 +39,14 @@ public class CartController {
                                                     cartService.removeFromCart(bookId, userId));
         return new ResponseEntity<>(responseDTO,HttpStatus.OK);
     }
+
+    @GetMapping("/addQuantity/{bookId}/{userId}")
+    public ResponseEntity<Integer> addBookQuantity(@PathVariable("bookId") int bookId, @PathVariable("userId") int userId) throws UserNotFoundException, BookNotFoundException {
+        return new ResponseEntity<>(cartService.addBookQuantity(userId,bookId), HttpStatus.OK);
+    }
+
+    @GetMapping("/removeQuantity/{bookId}/{userId}")
+    public ResponseEntity<Integer> removeBookQuantity(@PathVariable("bookId") int bookId, @PathVariable("userId") int userId) throws UserNotFoundException, BookNotFoundException {
+        return new ResponseEntity<>(cartService.removeBookQuantity(userId,bookId), HttpStatus.OK);
+    }
 }

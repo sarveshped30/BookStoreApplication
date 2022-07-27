@@ -16,4 +16,11 @@ public interface IBookService {
     Book getBookByBookId(int bookId) throws BookNotFoundException;
     Book updateBookById(int bookId, BookDTO bookDTO) throws BookNotFoundException;
     void deleteBookById(int bookId) throws BookNotFoundException;
+    List<Book> sortBooksAscending();
+    List<Book> sortBooksDescending();
+
+    Book initiateBookQuantity(int bookId) throws BookNotFoundException;
+
+    List<Book> initiateAllBooksQuantity();
+
 }

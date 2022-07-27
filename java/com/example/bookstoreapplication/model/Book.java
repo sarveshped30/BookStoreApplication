@@ -22,7 +22,7 @@ public class Book {
     private String bookName;
     private String author;
     private int bookPrize;
-
+    private int quantity;
     @Lob
     private String bookImage;
 }
