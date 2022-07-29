@@ -23,9 +23,14 @@ public class OrderController {
     private IOrderService orderService;
 
     //------------------------------Placing order---------------------------------//
-    @GetMapping("/{bookId}/{userId}")
-    public ResponseEntity<ResponseDTO> placeOrder(@PathVariable("bookId") int bookId, @PathVariable("userId") int userId) throws UserNotFoundException, BookNotFoundException, BookOutOfStockException {
-        ResponseDTO responseDTO = ResponseDTO.Build("Order successful", orderService.placeOrder(bookId, userId));
+    @PostMapping("/{userId}/{totalPrize}")
+    public ResponseEntity<ResponseDTO> placeOrder(@PathVariable("userId") int userId,@PathVariable("totalPrize") long totalPrize,@RequestBody OrderDTO orderDTO) throws UserNotFoundException, BookNotFoundException, BookOutOfStockException {
+        ResponseDTO responseDTO = ResponseDTO.Build("Order successful", orderService.placeOrder(userId, totalPrize,orderDTO));
         return new ResponseEntity<>(responseDTO, HttpStatus.OK);
+    }
+
+    @GetMapping("/latest")
+    public ResponseEntity<Integer> getOrderId() {
+        return new ResponseEntity<>(orderService.latestOrderId(), HttpStatus.OK);
     }
 }

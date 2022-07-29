@@ -12,4 +12,7 @@ public interface ICartService {
     int addBookQuantity(int userId, int bookId) throws UserNotFoundException, BookNotFoundException;
 
     int removeBookQuantity(int userId, int bookId) throws UserNotFoundException, BookNotFoundException;
+
+    long getTotalPrize(int userId) throws UserNotFoundException;
+    User emptyCart(int userId) throws UserNotFoundException;
 }

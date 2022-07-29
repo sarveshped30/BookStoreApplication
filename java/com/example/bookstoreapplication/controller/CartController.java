@@ -49,4 +49,15 @@ public class CartController {
     public ResponseEntity<Integer> removeBookQuantity(@PathVariable("bookId") int bookId, @PathVariable("userId") int userId) throws UserNotFoundException, BookNotFoundException {
         return new ResponseEntity<>(cartService.removeBookQuantity(userId,bookId), HttpStatus.OK);
     }
+
+    @GetMapping("/totalPrize/{userId}")
+    public ResponseEntity<Long> getTotalPrize(@PathVariable int userId) throws UserNotFoundException {
+        return new ResponseEntity<>(cartService.getTotalPrize(userId), HttpStatus.OK);
+    }
+
+    @GetMapping("/empty/{userId}")
+    public ResponseEntity<ResponseDTO> emptyCart(@PathVariable int userId) throws UserNotFoundException {
+        ResponseDTO responseDTO = ResponseDTO.Build("Cart is empty", cartService.emptyCart(userId));
+        return new ResponseEntity<>(responseDTO, HttpStatus.OK);
+    }
 }

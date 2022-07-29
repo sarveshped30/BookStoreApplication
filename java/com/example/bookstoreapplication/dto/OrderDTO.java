@@ -9,6 +9,10 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class OrderDTO {
 
-    private int userId;
-    private int bookId;
+    private String name;
+    private String mobileNo;
+    private String emailId;
+    private String address;
+    private String city;
+    private String state;
 }

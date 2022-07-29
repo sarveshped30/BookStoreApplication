@@ -8,5 +8,7 @@ import com.example.bookstoreapplication.model.Order;
 
 public interface IOrderService {
 
-    Order placeOrder(int bookId, int userId) throws UserNotFoundException, BookNotFoundException, BookOutOfStockException;
+    Order placeOrder(int userId,long totalPrize, OrderDTO orderDTO) throws UserNotFoundException, BookNotFoundException, BookOutOfStockException;
+
+    int latestOrderId();
 }

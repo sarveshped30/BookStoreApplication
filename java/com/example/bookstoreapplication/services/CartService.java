@@ -93,4 +93,25 @@ public class CartService implements ICartService{
         }
         return bookQuantity;
     }
+
+    @Override
+    public long getTotalPrize(int userId) throws UserNotFoundException {
+        long totalPrize = 0;
+        User user = userService.getUserById(userId);
+        List<Book> books = user.getBooks();
+
+        if(books != null) {
+            for(Book book : books) {
+               totalPrize += (long) book.getBookPrize() * book.getQuantity();
+            }
+        }
+        return totalPrize;
+    }
+
+    @Override
+    public User emptyCart(int userId) throws UserNotFoundException {
+        User user = userService.getUserById(userId);
+        user.getBooks().removeAll(user.getBooks());
+        return userRepository.save(user);
+    }
 }
